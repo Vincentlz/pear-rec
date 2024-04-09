@@ -39,9 +39,13 @@ jobs:
           path: packages/desktop/release
 
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: packages/desktop/release/**
+          files: |
+            packages/desktop/release/*.Applmage
+            packages/desktop/release/*.exe
+            packages/desktop/release/*.dmg
+            packages/desktop/release/*.yml
         env:
           GITHUB_TOKEN: '${{ secrets.ACCESS_TOKEN }}'
