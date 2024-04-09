@@ -26,20 +26,11 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
+
       - name: Build Electron App
         run: 'pnpm run build:desktop'
         env:
           GITHUB_TOKEN: '${{ secrets.ACCESS_TOKEN }}'
-
-      - name: Cleanup Artifacts for Windows
-        if: matrix.os == 'windows-latest'
-        run: |
-          npx rimraf "packages/desktop/release/!(*.exe)"
-
-      - name: Cleanup Artifacts for MacOS
-        if: matrix.os == 'macos-latest'
-        run: |
-          npx rimraf "packages/desktop/release/!(*.dmg)"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
